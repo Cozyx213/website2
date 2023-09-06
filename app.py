@@ -1,6 +1,5 @@
-import sqlite3 , datetime
+import sqlite3 , datetime, phrases
 from flask import Flask, render_template, request, redirect, url_for, jsonify
-import phrases
 app=Flask(__name__)
 db = sqlite3.connect("enrollees.db",check_same_thread=False)
 db.row_factory = sqlite3.Row
@@ -60,6 +59,10 @@ def deregister():
 
 @app.route("/Chemistry")
 def Chemistry():
+    return render_template('Chemistry.html')
+                           
+@app.route("/chemistryData")
+def Chemistry_data():
     conn = sqlite3.connect('flashcards.db')
     conn.row_factory = sqlite3.Row
     cursor = conn.cursor()
@@ -73,7 +76,11 @@ def Chemistry():
     compounds_list = [dict(row) for row in compounds]
     elements_list = [dict(row) for row in elements]
     conn.close()
-    return render_template('Chemistry.html', elements=elements_list, compounds = compounds_list, phrases=phrases.PHRASES() )
+    
+    return {'elements':elements_list,
+             'compounds': compounds_list,
+            'phrases':phrases.PHRASES()
+            }
 #if __name__ == "__main__":
 #Specify the host and port here
 #    app.run(host="192.168.1.2", port=5100)

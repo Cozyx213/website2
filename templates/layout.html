@@ -1,21 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Argao National High School - Believe it. Achieve it. Succeed.</title>
-    <link rel="icon" href="{{ url_for('static',filename='pictures/LOGO_ANHS.png') }}" type="image/x-icon" width="32" height="32">
+    <link rel="icon" href="{{ url_for('static',filename='pictures/LOGO_ANHS.png') }}" type="image/x-icon" width="32"
+        height="32">
     <link href="{{ url_for('static',filename='styles/styles.css') }}" rel="stylesheet" type="text/css">
 </head>
-
 <body>
     <div class="page">
-        
+
         <div class="head_container">
             <div class="branding">
-                <img class="logo" src="{{ url_for('static',filename='pictures/LOGO_ANHS.png') }}" alt="ANHS LOGO" width="7%">
+                <img class="logo" src="{{ url_for('static',filename='pictures/LOGO_ANHS.png') }}" alt="ANHS LOGO"
+                    width="7%">
                 <div class="site-identity">
                     <p class="site-title">Argao National High School</p>
                     <a href="https://www.google.com/maps/place/Argao+National+High+School/@9.8850326,123.5949718,2306m/data=!3m1!1e3!4m6!3m5!1s0x33abc5ea58d9353d:0xea5e997821c98808!8m2!3d9.8863914!4d123.5970345!16s%2Fg%2F1tdz2bxc?entry=ttu"
@@ -28,15 +27,10 @@
                 <a href="{{ url_for('endix') }}">
                     <p>Home</p>
                 </a>
-                
-                <a href="{{ url_for('history') }}"  >
+                <a href="{{ url_for('history') }}">
                     <div>
                         <p>History</p>
-                    </div>          
-                </a>                
-                </a>
-                <a href="{{ url_for('Map') }}">
-                    <p>Campus Map</p>
+                    </div>
                 </a>
                 <a href="{{ url_for('Form') }}">
                     <p>Enroll</p>
@@ -44,23 +38,19 @@
                 <a href="{{ url_for('Chemistry') }}">
                     <p>Chemistry</p>
                 </a>
-                <a href="{{ url_for('Enrollees') }}" >
+                <a href="{{ url_for('Enrollees') }}">
                     <h2>Go to Leaderboards</h2>
                 </a>
-                
-
-
             </div>
-
         </div>
-
         {% block body %} {% endblock %}
         <hr>
         <footer>
             <div class="footer_container">
                 <div class="branding_footer_whole">
                     <div class="branding_footer">
-                        <img class="logo" src="{{ url_for('static',filename='pictures/LOGO_ANHS.png') }}" alt="ANHS LOGO" width="5%" height="10%">
+                        <img class="logo" src="{{ url_for('static',filename='pictures/LOGO_ANHS.png') }}"
+                            alt="ANHS LOGO" width="5%" height="10%">
                         <div class="site-identity_footer">
                             <p class="site-title_footer">Argao National High School</p>
                             <a href="https://www.google.com/maps/place/Argao+National+High+School/@9.8850326,123.5949718,2306m/data=!3m1!1e3!4m6!3m5!1s0x33abc5ea58d9353d:0xea5e997821c98808!8m2!3d9.8863914!4d123.5970345!16s%2Fg%2F1tdz2bxc?entry=ttu"
@@ -69,7 +59,6 @@
                                     VII</p>
                             </a>
                         </div>
-
                     </div>
                     <div class="branding_footer_motto">
                         Dream it. Believe it. Achieve it.
@@ -81,17 +70,15 @@
                             <img class="contact_logo" src="{{ url_for('static',filename='pictures/GMAIL_LOGO.png') }}"
                                 alt="gmail_logo" width="1rem">
                             <p class="contacts">302985argaonhs@gmail.com</p>
-                        </div>  
-                       
-                    </div>  
+                        </div>
+                    </div>
                     <a href="https://www.facebook.com/profile.php?id=100063811972895" target="_blank"><img
-                            src="{{ url_for('static',filename='pictures/FB_LOGO.png') }}" alt="fb_logo" width="30vw" height="30vh"></a>
+                            src="{{ url_for('static',filename='pictures/FB_LOGO.png') }}" alt="fb_logo" width="30vw"
+                            height="30vh"></a>
                 </div>
             </div>
         </footer>
     </div>
-    
-
 </body>
 
 
