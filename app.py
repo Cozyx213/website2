@@ -6,8 +6,6 @@ db = sqlite3.connect("enrollees.db",check_same_thread=False)
 db.row_factory = sqlite3.Row
 cursor = db.cursor()
 
-
-
 @app.route('/')
 def endix():
     return render_template("endix.html")
@@ -51,8 +49,6 @@ def EnrolleesJSON():
     userscores = db.execute("SELECT * FROM userscores ORDER BY score DESC, time ASC").fetchall()
     userscores_list = [{"id": row["id"], "name": row["name"], "score": row["score"], "time": row["time"], "date": row["date"]} for row in userscores]
     return jsonify(userscores_list)
-
-
 
 @app.route("/Deregister", methods =["post"])
 def deregister():

@@ -8,16 +8,15 @@ def insert_compound(compound_name, chemical_formula, description=''):
         INSERT INTO compounds (element_name, element_symbol, other_info)
         VALUES (?, ?, ?)
     ''', (compound_name, chemical_formula, description))
-    
+
     conn.commit()
     conn.close()
+    
 compounds=[]
 compounds_data = [
     ('Water', 'H2O', 'A clear, colorless liquid essential for life.'),
     ('Carbon Dioxide', 'CO2', 'A colorless gas produced during respiration and combustion.'),
-    ('Sodium Chloride', 'NaCl', 'A crystalline compound commonly used as a seasoning.'),
     ('Glucose', 'C6H12O6', 'A simple sugar that serves as an energy source in biology.'),
-   
     ('Methane', 'CH4', 'A colorless gas and the primary component of natural gas.'),
     ('Oxygen Gas', 'O2', 'A diatomic gas essential for respiration in many organisms.'),
     ('Ammonia', 'NH3', 'A pungent gas often used in cleaning products and refrigeration.'),
@@ -74,7 +73,6 @@ compounds_data += [
     ('Boric Acid', 'H3BO3', 'A white crystalline compound used as a mild antiseptic and insecticide.'),
     ('Carbon Disulfide', 'CS2', 'A colorless liquid used as a solvent and in the manufacture of rayon and cellophane.'),
     ('Hydrogen Cyanide', 'HCN', 'A colorless, highly toxic gas used in chemical synthesis and fumigation.'),
-   
     # Continue with more compounds as needed...
 ]
 compounds_data += [
@@ -100,7 +98,6 @@ compounds_data += [
     ('Silicon Dioxide', 'SiO2', 'A compound commonly found in nature as quartz and used in various applications.'),
     ('Potassium Carbonate', 'K2CO3', 'A white salt used in the production of glass, soap, and other chemicals.'),
     ('Acetone', 'C3H6O', 'A colorless liquid solvent commonly used in nail polish removers and as an industrial solvent.'),
-   
     # Continue with more compounds as needed...
 ]
 for compound in compounds_data:
