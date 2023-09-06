@@ -1,0 +1,46 @@
+
+#counter_container {
+  
+  font-size: 100px;
+  font-family: 'Common Pixel';
+}
+
+body {
+  margin: auto;
+  padding: 0;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  flex-flow: column;
+  background-color: rgb(54, 38, 38);
+
+  justify-content: center;
+  align-items: center;
+}
+
+#counter_container {
+  display: flex;
+  text-align: center;
+
+  color: aliceblue;
+  content: "1";
+
+  pointer-events: none;
+  user-select: none;
+}
+#retry{
+    font-family: 'Common Pixel';
+    display: flex;
+    font-size: 15vw;
+}
+#ghost {
+
+  position: absolute;
+  width: 10vh ;
+  
+  cursor: pointer;
+  /* ... other styles ... */
+  /*pointer-events: none;  Prevent clicks on the container */
+  border-radius: 35%;
+
+}

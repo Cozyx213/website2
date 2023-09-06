@@ -1,0 +1,35 @@
+{% extends "layout.html" %}
+
+{% block body %}
+
+
+<div class="enroll">
+
+    <form id="loginform" action="/Enroll" method="post">
+
+        <fieldset>
+            <h1>Enroll</h1>
+            <label for="username"> Enter username: <input required type="text" id="username" name="username"
+                    placeholder="Jeek" autofocus></label>
+            <select name="strand">
+                <option disable s elected>Strand</option>
+                {% for strand in strands %}
+                <option>{{strand}}</option>
+                {% endfor %}
+
+            </select>
+            <select name="section">
+                <option disable selected>Section</option>
+                {% for section in sections %}
+                <option>{{section}}</option>
+                {% endfor %}
+
+            </select>
+            <input type="submit" value="Enroll">
+        </fieldset>
+
+    </form>
+</div>
+
+
+{% endblock %}

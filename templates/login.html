@@ -1,0 +1,17 @@
+{% extends "layout.html" %}
+
+{% block body %}
+
+<div class="enroll">
+    <body>
+        <h1>Login Page</h1>
+        <form method="POST" action="/login">
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username" required>
+            <button type="submit">Login</button>
+        </form>
+    </body>
+</div>
+
+
+{% endblock %}

@@ -1,0 +1,24 @@
+{% extends "layout.html" %}
+
+{% block body %}
+<h1>Leaderboards</h1>
+<table>
+    <thead>
+        <tr>
+            
+            <th>Name</th>
+            <th>Score</th>
+            <th>time(s)</th>
+            <th>Date</th>
+        </tr>
+    </thead>
+    <tbody id ="userscores-table">
+  
+        
+    </tbody>
+
+</table>
+<script src="{{ url_for('static', filename='js/enrollees.js') }}"></script>
+
+
+{% endblock %}

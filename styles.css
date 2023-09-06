@@ -1,0 +1,635 @@
+body {
+    margin: 0;
+    padding: 0;
+
+}
+
+.map_caption {
+    display: flex;
+    justify-content: center;
+    font-family: sans-serif;
+}
+
+.page {
+    width: 100%;
+    background-color: rgba(255, 255, 255, 0.9);
+    margin-left: auto;
+    margin-right: auto;
+    padding-top: 0;
+    max-width: auto;
+    max-height: auto;
+    height: auto;
+    box-sizing: border-box;
+}
+
+
+
+.site-title {
+    margin-top: 0;
+    font-family: sans-serif;
+    font-size: 1.3vw;
+    line-height: 1.3;
+    font-weight: 600;
+    letter-spacing: 1px;
+    margin-bottom: 0;
+
+}
+
+.site-title_footer {
+    margin-top: 0;
+    font-family: "Poppins", sans-serif;
+    font-size: 1.3vw;
+    line-height: 1.3;
+    font-weight: 600;
+    margin-bottom: 0;
+
+}
+
+.site-identity {
+    margin-top: auto;
+    margin-bottom: auto;
+    margin-left: .5rem;
+    font-family: sans-serif;
+    margin-left: none;
+}
+
+.scrollable-div {
+    display: flex;
+    margin: 0 15.5%;
+    justify-content: center;
+
+    overflow-x: scroll;
+    white-space: nowrap;
+}
+
+.scrollable-div img {
+    margin: 0 10px;
+    /* Adjust the margin value as needed */
+}
+
+.scrollable-div::-webkit-scrollbar {
+    height: 0.5rem;
+    /* Set the width of the scrollbar */
+}
+
+.scrollable-div::-webkit-scrollbar-thumb {
+
+    background-color: #888;
+    /* Color of the scrollbar thumb */
+    border-radius: 5px;
+    /* Rounded corners for the thumb */
+}
+
+.scrollable-div::-webkit-scrollbar-track {
+    background-color: #f1f1f1;
+    /* Color of the scrollbar track */
+}
+
+.site-identity_footer {
+
+    margin-top: auto;
+    margin-bottom: auto;
+    margin-left: 0.5rem;
+    font-family: sans-serif;
+    display: block;
+}
+
+.socials {
+    margin-top: auto;
+    margin-bottom: auto;
+    font-family: sans-serif;
+    display: inline-flex;
+    margin-left: .5vw;
+    margin-right: auto;
+}
+
+.socials_footer {
+    margin-top: auto;
+    margin-bottom: auto;
+    justify-content: flex-end;
+    font-family: sans-serif;
+    display: inline-block;
+
+}
+
+.site-description {
+    margin-top: 0;
+    margin-bottom: 0;
+    font-size: 1vw;
+
+    line-height: 1.2;
+    letter-spacing: .6px;
+    display: flex;
+
+    color: #727272;
+}
+
+.site-description_footer {
+    display: block;
+    margin-top: 0;
+    margin-bottom: 0;
+    font-size: 1.2vw;
+
+    line-height: 1.2;
+    letter-spacing: 1px;
+
+
+    color: #727272;
+}
+
+.logo {
+    display: inline-block;
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+.picture {
+    display: block;
+    filter: brightness(70%);
+}
+
+.picture_history {
+    display: block;
+    filter: brightness(30%);
+}
+
+a {
+    text-decoration: none;
+}
+
+.heading {
+    width: auto;
+    height: auto;
+    display: flex;
+    justify-content: space-around;
+    background-color: rgb(19, 104, 104);
+
+}
+
+.contact_logo {
+    display: inline-block;
+    margin: auto;
+    width: 2rem;
+}
+
+.contacts {
+    margin-left: 10px;
+    display: inline-block;
+    color: rgba(255, 255, 255, 0.9)
+}
+
+
+
+.quick_call,
+.quick_email {
+
+    display: flex;
+}
+
+.branding {
+    display: flex;
+    justify-content: center;
+    height: auto;
+
+}
+
+.branding_footer {
+    display: flex;
+    justify-content: center;
+    width: auto;
+    height: auto;
+}
+
+.branding_footer_whole {
+
+    width: auto;
+    height: auto;
+}
+
+.heading p {
+    font-size: 1vw;
+    font-family: Arial;
+    transition: 0.4s;
+}
+
+.image_container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    width: auto;
+    /* Adjust the width to your image's dimensions */
+
+}
+
+.image_container_history {
+    display: flex;
+    position: relative;
+    width: auto;
+    /* Adjust the width to your image's dimensions */
+
+}
+
+.image_container img {
+    max-width: 100%;
+
+    height: auto;
+}
+
+.image_text {
+
+    letter-spacing: -.01em;
+    margin-left: 8%;
+    margin-right: 8%;
+    position: absolute;
+    color: rgb(231, 231, 231);
+    /* Set the text color */
+    font-size: 2.7vw;
+    /* Set the font size */
+    font-family: 'ITC Century Std';
+
+    line-height: 1.4;
+    padding: 0.5em;
+    /* Add some padding to the text */
+    word-wrap: break-word;
+    transition: .4s;
+}
+
+.history h1 {
+    text-align: center;
+    color: rgb(20, 100, 50);
+    font-family: sans-serif;
+    font-size: 2.2vw;
+
+}
+
+.information {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    flex-grow: 1;
+    white-space: nowrap;
+    align-items: center;
+
+}
+
+.information p {
+    font-family: sans-serif;
+    margin: 10px;
+    transition: .4s;
+    font-size: 2rem;
+
+}
+
+.information a {
+    gap: 10px;
+    align-items: center;
+    transition: .4s;
+
+
+}
+
+
+.information a:hover {
+    background-color: rgb(227, 219, 219);
+}
+
+.information a {
+    color: #000000;
+    text-decoration: none;
+}
+
+.history-container {
+    position: absolute;
+    max-width: 100%;
+    height: auto;
+    margin-top: 1%;
+    margin: 3%;
+
+}
+
+.history-container {
+    position: absolute;
+    transition: .2s;
+    text-align: justify;
+    letter-spacing: -.01em;
+    margin-block-start: 0.83em;
+    margin-block-end: 0.83em;
+    color: rgb(255, 255, 255);
+    font-size: 1.1575vw;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: 600;
+}
+
+@media screen and (min-width: 1001px) {
+    .head_container {
+        justify-content: space-between;
+        display: flex;
+        width: 100%;
+        padding: 10px 0;
+        height: auto;
+        box-shadow: 0 1px 2.3px rgba(92, 92, 92, 0.9);
+
+    }
+
+    .branding_footer_motto {
+        display: flex;
+        font-family: sans-serif;
+        font-size: 1.4vw;
+        justify-content: center;
+
+    }
+
+    .menu-button {
+        display: none;
+    }
+
+    .history_image p {
+        text-align: justify;
+        color: rgb(20, 100, 50);
+        font-size: 2rem;
+        margin-left: 15.5%;
+        margin-right: 15.5%;
+        font-family: sans-serif;
+    }
+
+    .green_history p {
+
+        text-align: justify;
+        color: #FFF;
+        font-size: 2rem;
+        margin-left: 15.5%;
+        margin-right: 15.5%;
+        padding-top: 10px;
+        padding-bottom: 10px;
+    }
+
+    .contacts {
+        font-size: 50px;
+    }
+}
+
+@media screen and (max-width: 1000px) {
+    .contacts {
+        align-self: center;
+    }
+
+    .quick_call p,
+    .quick_email p {
+        font-size: 13px;
+        display: flex;
+        text-align: center;
+    }
+
+    .quick_call img,
+    .quick_email img {
+        width: 16px;
+        display: inline-flex;
+        align-self: center;
+    }
+
+    .history h1 {
+        font-size: 40px;
+        line-height: 90%;
+        color: rgb(20, 100, 50);
+    }
+
+    .green_history p {
+        text-align: justify;
+        color: #FFF;
+        font-size: 100%;
+        margin-left: 3%;
+        margin-right: 3%;
+        padding-top: 4px;
+        padding: 0;
+        word-spacing: .2em;
+
+    }
+
+
+
+    .history_image p {
+
+        color: rgb(20, 100, 50);
+        font-size: 100%;
+        margin-left: 3%;
+        margin-right: 3%;
+        padding-top: 2%;
+        padding: 0;
+        word-spacing: .2em;
+        text-align: justify;
+        font-family: sans-serif;
+    }
+
+    .head_container {
+
+        justify-content: space-around;
+        width: 100%;
+        box-shadow: 0 1px 2.3px rgba(92, 92, 92, 0.9);
+
+    }
+
+    .information,
+    .socials_footer {
+        display: none;
+    }
+
+
+
+    .branding_footer {
+        justify-content: center;
+    }
+
+    .site-title_footer {
+        font-size: 2.8vw;
+    }
+
+
+    .site-title {
+        font-size: 2.8vw;
+        flex-wrap: wrap;
+    }
+
+    .site-description_footer,
+    .site-description {
+        font-size: 1.9vw;
+    }
+
+
+    .branding img {
+        width: 13.5%;
+
+    }
+
+    .branding_footer img {
+        width: 12%;
+        height: 24%;
+    }
+
+    .branding_footer_motto {
+        font-family: sans-serif;
+        display: flex;
+        font-size: 2.2vw;
+        justify-content: center;
+    }
+
+    .branding {
+        display: flex;
+        justify-content: center;
+    }
+
+    .menu-button {
+        display: flex;
+
+    }
+
+    .contacts {
+        font-size: 50px;
+    }
+
+    .heading {
+        height: 50px;
+        display: flex;
+        justify-content: space-around;
+    }
+}
+
+
+.compilation_container {
+    background-color: #f4f4f4;
+    display: block;
+
+}
+
+.compilation_container iframe {
+    border: 0;
+    margin: auto;
+
+}
+
+.map {
+    width: auto;
+    display: block;
+    margin-left: 10%;
+    margin-right: 10%;
+}
+
+footer {
+    background: #FFF;
+    height: 200px;
+    display: inline-flex;
+    width: 100%;
+    height: auto;
+}
+
+.footer_container {
+    display: flex;
+    padding: 20px;
+    width: 100%;
+    justify-content: flex-start;
+
+}
+
+
+
+hr {
+    margin: 0;
+    border-top: 0.5 dotted;
+    color: rgb(89, 89, 89);
+}
+
+/* Add some basic styles to the menu button and list */
+.menu-button {
+
+    color: rgb(0, 0, 0);
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+    font-size: 2vw;
+
+}
+
+.menu-list {
+    display: none;
+    list-style-type: none;
+    padding: 0;
+    position: relative;
+
+
+
+    border-radius: 5px;
+    padding: 5px;
+}
+
+.menu-list li {
+    padding: 5px;
+}
+
+.menu-list li a {
+    position: fixed;
+    color: #333;
+    text-decoration: none;
+}
+
+/* Show the menu list when the menu button is clicked */
+.show-menu {
+    display: block;
+
+}
+
+.menu_container {
+
+    display: flex;
+
+    justify-content: center;
+    align-self: center;
+
+}
+
+.menu-button::before {
+    content: "\2630";
+    font-size: 1vh;
+}
+
+
+
+.green_history {
+    background-color: rgb(20, 100, 50);
+    justify-content: center;
+    padding-top: 5px;
+    padding-bottom: 5px;
+
+    font-family: sans-serif;
+
+}
+
+
+.history_image {
+
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    flex-direction: row;
+    padding: 0;
+
+}
+
+p {
+    font-family: sans-serif;
+}
+
+
+.history_image img {
+    width: 400px;
+
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+
+}
+
+.map iframe {
+    display: flex;
+    justify-content: center;
+}
