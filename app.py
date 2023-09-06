@@ -6,18 +6,7 @@ db = sqlite3.connect("enrollees.db",check_same_thread=False)
 db.row_factory = sqlite3.Row
 cursor = db.cursor()
 
-SECTIONS=[
-    "THEIA",
-    "SELENE",
-    "HELIOS",
-    "GAIA",
-]
-STRANDS=[
-    "STEM",     
-    "HUMSS",
-    "ABM",
-    "ICT",  
-]
+
 
 @app.route('/')
 def endix():
@@ -25,7 +14,7 @@ def endix():
 
 @app.route("/Form")
 def Form():
-    return render_template("Form.html", strands=STRANDS, sections=SECTIONS)
+    return render_template("Form.html", strands=phrases.STRANDS(), sections=phrases.SECTIONS())
 
 @app.route("/History")
 def history():
