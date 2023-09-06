@@ -15,7 +15,7 @@ compounds=[]
 compounds_data = [
     ('Water', 'H2O', 'A clear, colorless liquid essential for life.'),
     ('Carbon Dioxide', 'CO2', 'A colorless gas produced during respiration and combustion.'),
-    ('Salt', 'NaCl', 'A crystalline compound commonly used as a seasoning.'),
+    ('Sodium Chloride', 'NaCl', 'A crystalline compound commonly used as a seasoning.'),
     ('Glucose', 'C6H12O6', 'A simple sugar that serves as an energy source in biology.'),
    
     ('Methane', 'CH4', 'A colorless gas and the primary component of natural gas.'),
@@ -74,7 +74,7 @@ compounds_data += [
     ('Boric Acid', 'H3BO3', 'A white crystalline compound used as a mild antiseptic and insecticide.'),
     ('Carbon Disulfide', 'CS2', 'A colorless liquid used as a solvent and in the manufacture of rayon and cellophane.'),
     ('Hydrogen Cyanide', 'HCN', 'A colorless, highly toxic gas used in chemical synthesis and fumigation.'),
-    ('Methyl Ethyl Ketone', 'C4H8O', 'A colorless liquid solvent used in paints and coatings.'),
+   
     # Continue with more compounds as needed...
 ]
 compounds_data += [

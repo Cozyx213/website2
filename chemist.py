@@ -14,7 +14,6 @@ elements = ["Hydrogen", "Helium", "Lithium", "Beryllium", "Boron", "Carbon", "Ni
             "Roentgenium", "Copernicium", "Nihonium", "Flerovium", "Moscovium", "Livermorium", "Tennessine", "Oganesson"]
 time.sleep(3)
 for element in elements:
-
     time.sleep(0.1)
     keyboard.write(element)
     keyboard.press("enter")
