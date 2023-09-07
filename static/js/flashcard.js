@@ -29,7 +29,7 @@ fetch('/chemistryData')
     const scoreSpan = document.getElementById('score');
     const descriptionDiv = document.querySelector('.description');
     const backDiv = document.querySelector('.back');
-    const checkButton = document.getElementById('checkButton');
+    
     const nextButton = document.getElementById('nextButton');
     const shuffleButton = document.getElementById('shuffleButton');
     const toggleDescriptionButton = document.getElementById('toggleDescriptionButton');
@@ -45,7 +45,7 @@ fetch('/chemistryData')
         }
     });
     //buttons
-    checkButton.addEventListener('click', () => checkAnswer());
+    
     nextButton.addEventListener('click', () => nextFlashcard());
     shuffleButton.addEventListener('click', () => shuffleFlashcards());
     toggleDescriptionButton.addEventListener('click', () => toggleDescription());
@@ -83,10 +83,16 @@ fetch('/chemistryData')
         flashcardSymbol.textContent = flashcard.element_symbol;
         answerInput.value = '';
         descriptionDiv.textContent = flashcard.other_info;
-        backDiv.style.display = 'none';
+        hideAnswer();
     }
     function handleCorrectAnswer(){
-        score++;
+        if (currentData===compounds){
+            score+=5
+        }
+        else{
+            score+=3
+        }
+        
         scoreSpan.textContent = score;
         currentData[currentFlashcardIndex].done = true; // Mark flashcard as done
         
@@ -103,7 +109,12 @@ fetch('/chemistryData')
         const correctAnswer = currentData[currentFlashcardIndex].element_name.toLowerCase();
         if (userAnswer === correctAnswer) {
             handleCorrectAnswer();
-        } else {
+        }
+        else if(userAnswer==="show"){
+            showAnswer();
+            answerInput.value = '';
+        }
+        else{
             handleIncorrectAnswer();
         }
         
@@ -120,6 +131,7 @@ fetch('/chemistryData')
         } else {
             alert("You've completed all the flashcards!");
         }
+
     }
     function shuffleFlashcards() {
         for (let i = currentData.length - 1; i > 0; i--) {
@@ -156,31 +168,40 @@ fetch('/chemistryData')
         updatePrompt(currentData);
         updateFlashcard();
     }
+    function showAnswer(){
+        const flashcard = currentData[currentFlashcardIndex];
+        const answerParagraph = backDiv.querySelector('p')
+        answerParagraph.textContent = `The answer is ${flashcard.element_name}`
+        backDiv.style.display = 'block';
+    }
+    function hideAnswer(){
+        backDiv.style.display = 'none';
+    }
     function toggleAnswer() {
         const flashcard = currentData[currentFlashcardIndex];
         const answerParagraph = backDiv.querySelector('p')
-        if (backDiv.style.display === 'none') {
-            backDiv.style.display = 'block';
-            answerParagraph.textContent = `The answer is ${flashcard.element_name}`
-        }
-        else {
-            backDiv.style.display = 'none';
-            answerParagraph.textContent = 'So you give up huh... It\'s Okay';
-        }
+        answerParagraph.textContent = `The answer is ${flashcard.element_name}`
+        showAnswer();
     }
+    
     function shareScoreToLeaderboards() {
         const endTime = Date.now();
         const totalTimeSpent = (endTime - flashcardActivityStartTime) / 1000; // Convert to seconds
         const timeSpentParam = totalTimeSpent;
-        const name = prompt("Please enter your username to put in the leaderboards:");
-        if (name !== null) { // User pressed OK in the prompt
-            const scoreParam = score; // Assuming score is a global variable
-            // Calculate the total time spent on the flashcard activity
-            // Set the form field values
-            document.getElementById('scoreInput').value = scoreParam;
-            document.getElementById('timeSpentInput').value = timeSpentParam;
-            document.getElementById('nameInput').value = name;
-            // Trigger the form submission
-            document.getElementById('leaderboardForm').submit();
+        const name = prompt("Please enter username to place in the leaderboards:");
+        const scoreParam = score; // Assuming score is a global variable
+
+        document.getElementById('scoreInput').value = scoreParam;
+        document.getElementById('timeSpentInput').value = timeSpentParam;// Calculate the total time spent on the flashcard activity
+        document.getElementById('nameInput').value = name;
+        
+        if (name !== null&& name.trim() !== "") { // User pressed OK in the prompt
+            if (name.length >11){
+                alert("Username can't be more than 10 characters")
+            }else{
+                document.getElementById('leaderboardForm').submit();
+            }
+        }else{
+            alert("Please enter a valid username.");
         }
     } })

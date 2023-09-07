@@ -3,7 +3,21 @@
 {% block body %}
 <!-- index.html -->
 <!-- index.html -->
+<style>
+    /* Style for the buttons */
+    button {
+        font-size: 1rem; /* Increase the text size */
+        padding: 5px 5px; /* Increase padding for larger size */
+    }
 
+    /* Style for the "Share to leaderboards" button */
+    #share {
+        font-size: 1.5rem;
+        padding: 5px 5px;
+    }
+
+    /* Add more styles for other buttons if needed */
+</style>
 <body>
     <h2>Guess The element/compound:</h2>
     
@@ -15,7 +29,7 @@
             <button id="toggleDescriptionButton">Show Description</button>
             <button id="toggleDataButton">Elements/Compounds</button>
             <button id="showAnswer">Reveal</button>
-            <h2 id="flashcard-symbol"></h2>
+            <h2 id="flashcard-symbol" style="font-size: 3.4rem;"></h2>
             <div class="description" style="display: none">
                 <!-- Description content goes here -->
             </div>
@@ -23,7 +37,7 @@
                 <p>Guess the Element:</p>
 
                 <input type="text" id="answer" placeholder="Enter your answer">
-                <button id="checkButton">Enter</button>
+                
             </div>
             <div class="back" style="display: none">
                 <p></p>
