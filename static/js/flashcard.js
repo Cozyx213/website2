@@ -93,6 +93,7 @@ fetch('/chemistryData')
             const randomPhraseIndex = Math.floor(Math.random() * motivationalPhrases.length);
             backDiv.querySelector('p').textContent = motivationalPhrases[randomPhraseIndex];
         }
+        
     }
     function nextFlashcard() {
         // Find the next undone flashcard

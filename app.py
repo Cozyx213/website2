@@ -28,7 +28,7 @@ def Enroll():
     time = request.form.get("total_time_spent")
 
     current_datetime = datetime.datetime.now()
-    formatted_datetime = current_datetime.strftime('%Y-%m-%d %H:%M:%S')
+    formatted_datetime = current_datetime.strftime('%m-%d-%y %H:%M:%S')
 
     print(username,score,time,formatted_datetime)
     if not username:
