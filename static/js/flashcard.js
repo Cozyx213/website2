@@ -52,12 +52,13 @@ fetch('/chemistryData')
     toggleDataButton.addEventListener('click', () => toggleData()); // New event listener
     toggleAnswerButton.addEventListener('click', () => toggleAnswer());
     shareButton.addEventListener('click', shareScoreToLeaderboards);
+    
     // Initial setup
     updateFlashcard();
     // Functions
-    window.onload = function () {
-        flashcardActivityStartTime = Date.now(); // Store the start time
-    };
+    
+    flashcardActivityStartTime = Date.now(); // Store the start time
+    
     function redirectToEnrollmentPage() {
         const scoreParam = `score=${score}`;
         const enrollmentURL = "/Enroll?" + scoreParam; // Replace with the actual URL of your enrollment page
