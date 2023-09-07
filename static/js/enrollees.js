@@ -16,15 +16,18 @@ function updateUserscoresTable() {
             // Clear the current table content
             document.getElementById("userscores-table").innerHTML = "";
 
-            // Update the table with the new data
+             // Update the table with the new data and calculate ranking
+             let ranking = 1; // Initialize the ranking
             data.forEach(userscore => {
                 const row = document.createElement("tr");
                 row.innerHTML = `
+                    <td>${ranking}</td>
                     <td>${userscore.name}</td>
                     <td>${userscore.score}</td>
                     <td>${userscore.time}</td>
                     <td>${userscore.date}</td>
                 `;
+                ranking ++;
                 document.getElementById("userscores-table").appendChild(row);
             });
         });
