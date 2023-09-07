@@ -45,7 +45,18 @@ def Enrollees():
 
 @app.route("/EnrolleesJSON")
 def EnrolleesJSON():
-    userscores = db.execute("SELECT * FROM userscores ORDER BY score DESC, time ASC").fetchall()
+    sort_column = request.args.get('sort', default='score')  # Default to sorting by score
+    # Adjust the SQL query based on the selected column
+    if sort_column == 'time':
+        userscores = db.execute("SELECT * FROM userscores ORDER BY time ASC, score DESC").fetchall()
+    elif sort_column == 'date':
+        userscores = db.execute("SELECT * FROM userscores ORDER BY date DESC, score DESC").fetchall()
+    elif sort_column == 'name':
+        userscores = db.execute("SELECT * FROM userscores ORDER BY name ASC, score DESC, time DESC").fetchall()    
+    else:
+        # Default sorting by score
+        userscores = db.execute("SELECT * FROM userscores ORDER BY score DESC, time ASC").fetchall()
+    
     userscores_list = [{"id": row["id"], "name": row["name"], "score": row["score"], "time": row["time"], "date": row["date"]} for row in userscores]
     return jsonify(userscores_list)
 

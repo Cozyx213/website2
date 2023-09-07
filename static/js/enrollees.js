@@ -1,6 +1,16 @@
+// Define a variable to store the selected sorting column
+let selectedColumn = null;
+
+// Function to update the user scores table
 function updateUserscoresTable() {
+    // Build the URL for the AJAX request based on the selected column
+    let url = "/EnrolleesJSON";
+    if (selectedColumn) {
+        url += `?sort=${selectedColumn}`;
+    }
+
     // Make an AJAX request to the Flask endpoint to get the updated enrollees data
-    fetch("/EnrolleesJSON")
+    fetch(url)
         .then(response => response.json())
         .then(data => {
             // Clear the current table content
@@ -10,23 +20,43 @@ function updateUserscoresTable() {
             data.forEach(userscore => {
                 const row = document.createElement("tr");
                 row.innerHTML = `
-                    
                     <td>${userscore.name}</td>
                     <td>${userscore.score}</td>
                     <td>${userscore.time}</td>
                     <td>${userscore.date}</td>
-                    <!--<td>
-                        <form action="/Deregister" method="post">
-                            <input name="id" type="hidden" value="${userscore.id}">
-                            <input type="submit" value="Deregister">
-                        </form>
-                        --></td>
                 `;
                 document.getElementById("userscores-table").appendChild(row);
             });
         });
 }
 
+// Add event listeners for sorting buttons
+const sortNameButton = document.getElementById('sortNameButton');
+const sortScoreButton = document.getElementById('sortScoreButton');
+const sortTimeButton = document.getElementById('sortTimeButton');
+const sortDateButton = document.getElementById('sortDateButton');
+
+sortNameButton.addEventListener('click', () => {
+    sortTableByColumn('name');
+});
+sortScoreButton.addEventListener('click', () => {
+    sortTableByColumn('score');
+});
+sortTimeButton.addEventListener('click', () => {
+    sortTableByColumn('time');
+});
+sortDateButton.addEventListener('click', () => {
+    sortTableByColumn('date');
+});
+
+// Function to sort the table data by the chosen column
+function sortTableByColumn(column) {
+    // Set the selected column
+    selectedColumn = column;
+    // Update the table immediately after selecting a sorting column
+    updateUserscoresTable();
+}
+
 // Update the table initially and then periodically (e.g., every 5 seconds)
-updateUserscoresTable();
-setInterval(updateUserscoresTable, 5000); // Adjust the interval as needed
+updateUserscoresTable(); // Initial update
+setInterval(() => updateUserscoresTable(), 5000); // Periodic update every 5 seconds

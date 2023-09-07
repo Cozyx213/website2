@@ -22,7 +22,7 @@ fetch('/chemistryData')
     let currentData = elements; // Initially, start with flashcards
     let elementsProgress = 0;
     let compoundsProgress = 0;
-    let flashcardActivityStartTime;
+    let flashcardActivityStartTime = null;
     // DOM elements
     const flashcardSymbol = document.getElementById('flashcard-symbol');
     const answerInput = document.getElementById('answer');
@@ -52,12 +52,17 @@ fetch('/chemistryData')
     toggleDataButton.addEventListener('click', () => toggleData()); // New event listener
     toggleAnswerButton.addEventListener('click', () => toggleAnswer());
     shareButton.addEventListener('click', shareScoreToLeaderboards);
-    
+    answerInput.addEventListener('input', () => {
+        // Start the timer if the score is greater than 0 and the timer has not started
+        if ( flashcardActivityStartTime === null) {
+            flashcardActivityStartTime = Date.now();
+        }
+    });
     // Initial setup
     updateFlashcard();
     // Functions
     
-    flashcardActivityStartTime = Date.now(); // Store the start time
+     // Store the start time
     
     function redirectToEnrollmentPage() {
         const scoreParam = `score=${score}`;
@@ -80,19 +85,26 @@ fetch('/chemistryData')
         descriptionDiv.textContent = flashcard.other_info;
         backDiv.style.display = 'none';
     }
+    function handleCorrectAnswer(){
+        score++;
+        scoreSpan.textContent = score;
+        currentData[currentFlashcardIndex].done = true; // Mark flashcard as done
+        
+        nextFlashcard();
+    }
+    function handleIncorrectAnswer(){
+        backDiv.style.display = 'block';
+        const randomPhraseIndex = Math.floor(Math.random() * motivationalPhrases.length);
+        backDiv.querySelector('p').textContent = motivationalPhrases[randomPhraseIndex];
+    }
     function checkAnswer() {
         const origAnswer = currentData[currentFlashcardIndex].element_name;
         const userAnswer = answerInput.value.trim().toLowerCase();
         const correctAnswer = currentData[currentFlashcardIndex].element_name.toLowerCase();
         if (userAnswer === correctAnswer) {
-            score++;
-            scoreSpan.textContent = score;
-            currentData[currentFlashcardIndex].done = true; // Mark flashcard as done
-            nextFlashcard();
+            handleCorrectAnswer();
         } else {
-            backDiv.style.display = 'block';
-            const randomPhraseIndex = Math.floor(Math.random() * motivationalPhrases.length);
-            backDiv.querySelector('p').textContent = motivationalPhrases[randomPhraseIndex];
+            handleIncorrectAnswer();
         }
         
     }
