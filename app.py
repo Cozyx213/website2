@@ -8,7 +8,12 @@ cursor = db.cursor()
 @app.route('/')
 def endix():
     return render_template("endix.html")
-
+@app.route("/Chemistry2")
+def Chemistry_2():
+    return render_template('Chemistry2.html')
+@app.route("/Chemistry3")
+def Chemistry_3():
+    return render_template('Chemistry3.html')
 @app.route("/Form")
 def Form():
     return render_template("Form.html", strands=phrases.STRANDS(), sections=phrases.SECTIONS())

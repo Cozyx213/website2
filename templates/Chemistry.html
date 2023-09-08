@@ -19,9 +19,12 @@
     /* Add more styles for other buttons if needed */
 </style>
 <body>
+    <a href="{{ url_for('Enrollees') }}">
+        <p>Go to Leaderboards</p>
+    </a>
     <h2>Guess The element/compound:</h2>
     
-    <div id="flashcard-container">
+    <div style="background-color:rgb(185, 185, 185);"id="flashcard-container">
 
         <div class="flashcard">
             <button id="nextButton">Next</button>
@@ -44,7 +47,7 @@
             </div>
         </div>
 
-        <button id="share">Share to leaderboards</button>
+        
         <form id="leaderboardForm" action="/leaderboards" method="post">
             <input type="hidden" id="scoreInput" name="score" value="">
             <input type="hidden" id="timeSpentInput" name="total_time_spent" value="">
@@ -53,7 +56,7 @@
         </form>
     </div>
     <p>Score: <span id="score">0</span></p>
-
+    <button id="share">Share to leaderboards</button>
     <script src="{{ url_for('static', filename='js/flashcard.js') }}"></script>
 </body>
 {% endblock%}
