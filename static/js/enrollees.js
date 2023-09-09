@@ -8,7 +8,25 @@ function updateUserscoresTable() {
     if (selectedColumn) {
         url += `?sort=${selectedColumn}`;
     }
-
+function secondToTime(seconds){
+    if(seconds<60){
+        let sec = (seconds).toFixed(2);
+        return `${sec}s`
+    }else if(seconds<3600){
+        let minutes = (seconds/60).toFixed(0);
+        let sec = (seconds %60).toFixed(2);
+        return `${minutes}m ${sec}s`
+    }else{  
+        let hours = seconds/3600;
+        let roundedHour =Math.floor(hours);
+        let minutes = (hours-roundedHour)*60;
+        let roundedMin = Math.floor(minutes);
+        let sec = (minutes-roundedMin)*60;
+        let roundedSec = Math.floor(sec)
+        
+        return `${roundedHour}h ${roundedMin}m ${roundedSec}s`
+    }
+}    
     // Make an AJAX request to the Flask endpoint to get the updated enrollees data
     fetch(url)
         .then(response => response.json())
@@ -18,13 +36,15 @@ function updateUserscoresTable() {
 
              // Update the table with the new data and calculate ranking
              let ranking = 1; // Initialize the ranking
+             
             data.forEach(userscore => {
                 const row = document.createElement("tr");
+                let time = secondToTime(userscore.time);
                 row.innerHTML = `
                     <td>${ranking}</td>
                     <td>${userscore.name}</td>
                     <td>${userscore.score}</td>
-                    <td>${userscore.time}</td>
+                    <td>${time}</td>
                     <td>${userscore.date}</td>
                 `;
                 ranking ++;

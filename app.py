@@ -1,6 +1,7 @@
 import sqlite3 , datetime, phrases
 from flask import Flask, render_template, request, redirect, url_for, jsonify
 app=Flask(__name__)
+app.debug = True
 db = sqlite3.connect("enrollees.db",check_same_thread=False)
 db.row_factory = sqlite3.Row
 cursor = db.cursor()

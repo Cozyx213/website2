@@ -6,11 +6,11 @@
     <title>Argao National High School - Believe it. Achieve it. Succeed.</title>
     <link rel="icon" href="{{ url_for('static',filename='pictures/LOGO_ANHS.png') }}" type="image/x-icon" width="32"
         height="32">
+    <link rel="stylesheet" href = "/static/css/main.css">
     <link href="{{ url_for('static',filename='styles/styles.css') }}" rel="stylesheet" type="text/css">
 </head>
 <body>
     <div class="page">
-
         <div class="head_container">
             <div class="branding">
                 <img class="logo" src="{{ url_for('static',filename='pictures/LOGO_ANHS.png') }}" alt="ANHS LOGO"
@@ -23,25 +23,25 @@
                     </a>
                 </div>
             </div>
-            <div class="information">
-                <a href="{{ url_for('endix') }}">
+            <div class="information flex justify-center space-x-4">
+                <a class="font-bold px-2 py-2 text-slate-700 rounded-lg hover:bg-slate-100 hover:text-slate-900" href="{{ url_for('endix') }}">
                     <p>Home</p>
                 </a>
-                <a href="{{ url_for('history') }}">
+                <a class="font-bold px-2 py-2 text-slate-700 rounded-lg hover:bg-slate-100 hover:text-slate-900" href="{{ url_for('history') }}">
                     <div>
                         <p>History</p>
                     </div>
                 </a>
-                <a href="{{ url_for('Form') }}">
+                <a  class="font-bold px-2 py-2 text-slate-700 rounded-lg hover:bg-slate-100 hover:text-slate-900" href="{{ url_for('Form') }}">
                     <p>Enroll</p>
                 </a>
-                <a href="{{ url_for('Chemistry') }}">
+                <a class="font-bold px-2 py-2 text-slate-700 rounded-lg hover:bg-slate-100 hover:text-slate-900" href="{{ url_for('Chemistry') }}">
                     <p>Chemistry</p>
                 </a>
-                <a href="{{ url_for('Chemistry_2') }}">
+                <a class="font-bold px-2 py-2 text-slate-700 rounded-lg hover:bg-slate-100 hover:text-slate-900" href="{{ url_for('Chemistry_2') }}">
                     <p>Chemistry2</p>
                 </a>
-                <a href="{{ url_for('Chemistry_3') }}">
+                <a class="font-bold px-2 py-2 text-slate-700 rounded-lg hover:bg-slate-100 hover:text-slate-900" href="{{ url_for('Chemistry_3') }}">
                     <p>Chemistry3</p>
                 </a>
             </div>
@@ -65,7 +65,7 @@
                     </div>
                     <div class="branding_footer_motto">
                         Dream it. Believe it. Achieve it.
-                    </div>
+                    
                 </div>
                 <div class="socials_footer">
                     <div class="heading">

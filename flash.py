@@ -11,6 +11,7 @@ def insert_flashcard(element_name, element_symbol, atomic_number, other_info='')
         VALUES (?, ?, ?, ?)
     ''', (element_name, element_symbol, atomic_number, other_info))
     
+    
     conn.commit()
     conn.close()
 
