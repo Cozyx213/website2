@@ -1,0 +1,12 @@
+{% extends "layout.html" %}
+
+{% block body %}
+<body>
+    <h1>List of PPT Files</h1>
+    <ul>
+        {% for ppt_file in ppt_files %}
+            <li><a href="{{ url_for('download_ppt', ppt_filename=ppt_file) }}">{{ ppt_file }}</a></li>
+        {% endfor %}
+    </ul>
+</body>
+{% endblock %}

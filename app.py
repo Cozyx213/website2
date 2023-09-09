@@ -1,11 +1,27 @@
-import sqlite3 , datetime, phrases
-from flask import Flask, render_template, request, redirect, url_for, jsonify
+import sqlite3 , datetime, phrases, os
+from flask import Flask, render_template, request, redirect, url_for, jsonify, send_from_directory
 app=Flask(__name__)
 app.debug = True
 db = sqlite3.connect("enrollees.db",check_same_thread=False)
 db.row_factory = sqlite3.Row
 cursor = db.cursor()
+ppt_path = "modules/"
 
+def get_ppt_files():
+    ppt_files = []
+    for filename in os.listdir(ppt_path):
+        if filename.endswith(".pdf"):  # You can adjust the file extension if needed
+            ppt_files.append(filename)
+    ppt_files.sort()
+    return ppt_files
+
+@app.route('/Resources.html')
+def resource_download():
+    ppt_files = get_ppt_files()
+    return render_template('Resources.html', ppt_files=ppt_files)
+@app.route('/download_ppt/<ppt_filename>')
+def download_ppt(ppt_filename):
+    return send_from_directory(ppt_path, ppt_filename, as_attachment=True)
 @app.route('/')
 def endix():
     return render_template("endix.html")
@@ -15,6 +31,7 @@ def Chemistry_2():
 @app.route("/Chemistry3")
 def Chemistry_3():
     return render_template('Chemistry3.html')
+
 @app.route("/Form")
 def Form():
     return render_template("Form.html", strands=phrases.STRANDS(), sections=phrases.SECTIONS())
