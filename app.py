@@ -5,8 +5,8 @@ app.debug = True
 db = sqlite3.connect("enrollees.db",check_same_thread=False)
 db.row_factory = sqlite3.Row
 cursor = db.cursor()
-ppt_path = "modules/"
 
+ppt_path = "modules/"
 def get_ppt_files():
     ppt_files = []
     for filename in os.listdir(ppt_path):
@@ -104,11 +104,15 @@ def Chemistry_data():
     # Retrieve flashcards from the database
     cursor.execute('SELECT * FROM flashcards')
     elements = cursor.fetchall()
-    cursor.execute('SELECT * FROM compounds')
+    #cursor.execute('SELECT * FROM compounds')
+    #compounds = cursor.fetchall()
+
+    cursor.execute('SELECT * FROM polyions')
     compounds = cursor.fetchall()
-    
+
     compounds_list = [dict(row) for row in compounds]
     elements_list = [dict(row) for row in elements]
+    
     conn.close()
     
     return {'elements':elements_list,
