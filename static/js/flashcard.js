@@ -80,7 +80,7 @@ fetch('/chemistryData')
         }
         function compoundSubscript(formula) {
             // Regular expression to match element symbols and counts
-            const regex = /([A-Z][a-z]*)(\d*)(\^((\d+)[+-]?))?/g;
+            const regex = /([A-Z][a-z]*)(\d*)(\^([\d+]?[+-]?))?/g;
 
             // Replace element counts and superscripts
             const formulaWithSubscripts = formula.replace(regex, (match, element, count, _, superscript) => {
