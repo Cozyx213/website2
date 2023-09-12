@@ -13,23 +13,27 @@ fetch('/chemistryData')
     .then(data => {
         const elementsData = data.elements;
         const compoundsData = data.compounds;
+        const acidsData = data.acids;
         const motivationalPhrases = data.phrases;
         const elements = elementsData.map(element => ({ ...element, done: false }));
         const compounds = compoundsData.map(compound => ({ ...compound, done: false }));
+        const acids = acidsData.map(acid => ({ ...acid, done: false }));
         //lets
         let currentFlashcardIndex = 0;
         let score = 0;
         let currentData = elements; // Initially, start with flashcards
         let elementsProgress = 0;
         let compoundsProgress = 0;
+        let acidsProgress = 0;
         let flashcardActivityStartTime = null;
+
         // DOM elements
         const flashcardSymbol = document.getElementById('flashcard-symbol');
         const answerInput = document.getElementById('answer');
         const scoreSpan = document.getElementById('score');
         const descriptionDiv = document.querySelector('.description');
         const backDiv = document.querySelector('.back');
-
+        const acidButton = document.getElementById('acidButton');
         const nextButton = document.getElementById('nextButton');
         const shuffleButton = document.getElementById('shuffleButton');
         const toggleDescriptionButton = document.getElementById('toggleDescriptionButton');
@@ -37,7 +41,8 @@ fetch('/chemistryData')
         const toggleAnswerButton = document.getElementById('showAnswer');
         const promptText = document.querySelector('.content');
         const shareButton = document.getElementById('share');
-        const usernameInput = document.getElementById('username')
+        const usernameInput = document.getElementById('username');
+
         // Event listeners
         answerInput.addEventListener('keydown', (event) => {
             if (event.key === 'Enter') {
@@ -45,7 +50,7 @@ fetch('/chemistryData')
             }
         });
         //buttons
-
+        
         nextButton.addEventListener('click', () => nextFlashcard());
         shuffleButton.addEventListener('click', () => shuffleFlashcards());
         toggleDescriptionButton.addEventListener('click', () => toggleDescription());
@@ -76,6 +81,9 @@ fetch('/chemistryData')
             }
             else if (currentData === compounds) {
                 textPrompt.textContent = "Guess the compound:";
+            }
+            else if (currentData === acids) {
+                textPrompt.textContent = "Guess the acids:";
             }
         }
         function compoundSubscript(formula) {
@@ -155,7 +163,6 @@ fetch('/chemistryData')
             } else {
                 alert("You've completed all the flashcards!");
             }
-
         }
         function shuffleFlashcards() {
             for (let i = currentData.length - 1; i > 0; i--) {
@@ -183,24 +190,36 @@ fetch('/chemistryData')
                 compoundsProgress = currentFlashcardIndex;
                 currentData = compounds;
                 currentFlashcardIndex = compoundsProgress;
-            } else {
+            }
+
+            else if(currentData === compounds){
+                acidsProgress = currentFlashcardIndex;
+                currentData = acids;
+                currentFlashcardIndex = acidsProgress;
+            }
+            else {
                 // Switching from compounds to elements
                 elementsProgress = currentFlashcardIndex;
                 currentData = elements;
                 currentFlashcardIndex = elementsProgress;
             }
+
             updatePrompt(currentData);
             updateFlashcard();
         }
+
         function showAnswer() {
             const flashcard = currentData[currentFlashcardIndex];
+            score = score - 10;
             const answerParagraph = backDiv.querySelector('p')
             answerParagraph.textContent = `The answer is ${flashcard.element_name}`
             backDiv.style.display = 'block';
         }
+
         function hideAnswer() {
             backDiv.style.display = 'none';
         }
+
         function toggleAnswer() {
             const flashcard = currentData[currentFlashcardIndex];
             const answerParagraph = backDiv.querySelector('p')

@@ -2,6 +2,7 @@ import requests
 from bs4 import BeautifulSoup
 import sqlite3
 
+
 def insert_flashcard(element_name, element_symbol, atomic_number, other_info=''):
     
     conn = sqlite3.connect('flashcards.db')

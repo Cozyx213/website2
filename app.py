@@ -110,15 +110,21 @@ def Chemistry_data():
     cursor.execute('SELECT * FROM polyions')
     compounds = cursor.fetchall()
 
+    cursor.execute('SELECT * FROM acids')
+    acids = cursor.fetchall()
+
     compounds_list = [dict(row) for row in compounds]
     elements_list = [dict(row) for row in elements]
-    
+    acids_list = [dict(row) for row in acids]
+
     conn.close()
     
     return {'elements':elements_list,
              'compounds': compounds_list,
+             'acids':acids_list,
             'phrases':phrases.PHRASES()
             }
+
 #if __name__ == "__main__":
 #Specify the host and port here
 #    app.run(host="192.168.1.2", port=5100)
