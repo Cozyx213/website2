@@ -22,7 +22,7 @@ common_acids = [
     ("Citric Acid", "C6H8O7", "Found in citrus fruits and used as a food additive and flavoring agent."),
     ("Hydrofluoric Acid", "HF", "Highly corrosive and used in etching glass and for certain chemical reactions."),
     ("Phenol", "C6H5OH", "Used as an antiseptic and in the production of plastics and pharmaceuticals."),
-    ("Sulfuric Acid", "H2S2O7", "Known as oleum or fuming sulfuric acid, used in chemical synthesis."),
+    ("Disulfuric Acid", "H2S2O7", "Known as oleum or fuming ######### acid, used in chemical synthesis."),
     ("Hydrobromic Acid", "HBr", "Strong acid used in organic synthesis and as a reagent."),
     ("Perchloric Acid", "HClO4", "Highly reactive and used in analytical chemistry."),
     ("Tartaric Acid", "C4H6O6", "Found in grapes and used in baking and winemaking."),

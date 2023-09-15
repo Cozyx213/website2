@@ -26,6 +26,7 @@ fetch('/chemistryData')
         let compoundsProgress = 0;
         let acidsProgress = 0;
         let flashcardActivityStartTime = null;
+        let isFormulaMode = false;
 
         // DOM elements
         const flashcardSymbol = document.getElementById('flashcard-symbol');
@@ -42,7 +43,8 @@ fetch('/chemistryData')
         const promptText = document.querySelector('.content');
         const shareButton = document.getElementById('share');
         const usernameInput = document.getElementById('username');
-
+        const resetButton = document.getElementById('resetButton');
+        const swapButton = document.getElementById('swapAnswer')
         // Event listeners
         answerInput.addEventListener('keydown', (event) => {
             if (event.key === 'Enter') {
@@ -50,7 +52,7 @@ fetch('/chemistryData')
             }
         });
         //buttons
-        
+        swapButton.addEventListener('click', () =>formulaMode());
         nextButton.addEventListener('click', () => nextFlashcard());
         shuffleButton.addEventListener('click', () => shuffleFlashcards());
         toggleDescriptionButton.addEventListener('click', () => toggleDescription());
@@ -63,12 +65,36 @@ fetch('/chemistryData')
                 flashcardActivityStartTime = Date.now();
             }
         });
+
+        resetButton.addEventListener('click', () => {
+            // Reset the flashcards to their initial state
+            currentFlashcardIndex = 0;
+            score = 0;
+            elementsProgress = 0;
+            compoundsProgress = 0;
+            acidsProgress = 0;
+            flashcardActivityStartTime = null;
+
+            // Mark all flashcards as not done
+            elements.forEach(element => (element.done = false));
+            compounds.forEach(compound => (compound.done = false));
+            acids.forEach(acid => (acid.done = false));
+
+            // Shuffle the flashcards if needed (uncomment the line below)
+            // shuffleFlashcards();
+
+            // Update the UI to display the first flashcard
+            updateFlashcard();
+        });
         // Initial setup
         updateFlashcard();
         // Functions
 
         // Store the start time
-
+        function formulaMode(){
+            isFormulaMode = isFormulaMode ? false : true;
+            updateFlashcard();
+        }
         function redirectToEnrollmentPage() {
             const scoreParam = `score=${score}`;
             const enrollmentURL = "/Enroll?" + scoreParam; // Replace with the actual URL of your enrollment page
@@ -80,10 +106,10 @@ fetch('/chemistryData')
                 textPrompt.textContent = "Guess the element:";
             }
             else if (currentData === compounds) {
-                textPrompt.textContent = "Guess the compound:";
+                textPrompt.textContent = "Guess the Polyatomic ion:";
             }
             else if (currentData === acids) {
-                textPrompt.textContent = "Guess the acids:";
+                textPrompt.textContent = "Guess the acid:";
             }
         }
         function compoundSubscript(formula) {
@@ -110,15 +136,27 @@ fetch('/chemistryData')
         const formulaWithSubscripts = compoundSubscript(formula);
         console.log(formulaWithSubscripts); // Output: "H<sub>2</sub>O"
 
+
+
         function updateFlashcard() {
-            const flashcard = currentData[currentFlashcardIndex];
-            flashcardSymbol.innerHTML = compoundSubscript(flashcard.element_symbol);
-            answerInput.value = '';
-            descriptionDiv.textContent = flashcard.other_info;
-            hideAnswer();
+            if (isFormulaMode) {
+                const flashcard = currentData[currentFlashcardIndex];
+                flashcardSymbol.innerHTML = compoundSubscript(flashcard.element_name);
+                answerInput.value = '';
+                descriptionDiv.textContent = flashcard.other_info;
+                hideAnswer();
+            }
+            else {
+                const flashcard = currentData[currentFlashcardIndex];
+                flashcardSymbol.innerHTML = compoundSubscript(flashcard.element_symbol);
+                answerInput.value = '';
+                descriptionDiv.textContent = flashcard.other_info;
+                hideAnswer();
+            }
+
         }
         function handleCorrectAnswer() {
-            if (currentData === compounds) {
+            if (currentData === compounds && currentData === acids) {
                 score += 5
             }
             else {
@@ -136,19 +174,37 @@ fetch('/chemistryData')
             backDiv.querySelector('p').textContent = motivationalPhrases[randomPhraseIndex];
         }
         function checkAnswer() {
-            const origAnswer = currentData[currentFlashcardIndex].element_name;
-            const userAnswer = answerInput.value.trim().toLowerCase();
-            const correctAnswer = currentData[currentFlashcardIndex].element_name.toLowerCase();
-            if (userAnswer === correctAnswer) {
-                handleCorrectAnswer();
-            }
-            else if (userAnswer === "show") {
-                showAnswer();
-                answerInput.value = '';
+            if (isFormulaMode) {
+                const origAnswer = currentData[currentFlashcardIndex].element_symbol;
+                const userAnswer = answerInput.value.trim().toLowerCase();
+                const correctAnswer = currentData[currentFlashcardIndex].element_symbol.toLowerCase();
+                if (userAnswer === correctAnswer) {
+                    handleCorrectAnswer();
+                }
+                else if (userAnswer === "show") {
+                    showAnswer();
+                    answerInput.value = '';
+                }
+                else {
+                    handleIncorrectAnswer();
+                }
             }
             else {
-                handleIncorrectAnswer();
+                const origAnswer = currentData[currentFlashcardIndex].element_name;
+                const userAnswer = answerInput.value.trim().toLowerCase();
+                const correctAnswer = currentData[currentFlashcardIndex].element_name.toLowerCase();
+                if (userAnswer === correctAnswer) {
+                    handleCorrectAnswer();
+                }
+                else if (userAnswer === "show") {
+                    showAnswer();
+                    answerInput.value = '';
+                }
+                else {
+                    handleIncorrectAnswer();
+                }
             }
+
 
         }
         function nextFlashcard() {
@@ -192,7 +248,7 @@ fetch('/chemistryData')
                 currentFlashcardIndex = compoundsProgress;
             }
 
-            else if(currentData === compounds){
+            else if (currentData === compounds) {
                 acidsProgress = currentFlashcardIndex;
                 currentData = acids;
                 currentFlashcardIndex = acidsProgress;
@@ -209,11 +265,20 @@ fetch('/chemistryData')
         }
 
         function showAnswer() {
-            const flashcard = currentData[currentFlashcardIndex];
-            score = score - 10;
-            const answerParagraph = backDiv.querySelector('p')
-            answerParagraph.textContent = `The answer is ${flashcard.element_name}`
-            backDiv.style.display = 'block';
+            if (isFormulaMode) {
+                const flashcard = currentData[currentFlashcardIndex];
+                score = score - 10;
+                const answerParagraph = backDiv.querySelector('p')
+                answerParagraph.textContent = `The answer is ${flashcard.element_symbol}`
+                backDiv.style.display = 'block';
+            }else{
+                const flashcard = currentData[currentFlashcardIndex];
+                score = score - 10;
+                const answerParagraph = backDiv.querySelector('p')
+                answerParagraph.textContent = `The answer is ${flashcard.element_name}`
+                backDiv.style.display = 'block';
+            }
+            
         }
 
         function hideAnswer() {
