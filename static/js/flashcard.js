@@ -13,11 +13,13 @@ fetch('/chemistryData')
     .then(data => {
         const elementsData = data.elements;
         const compoundsData = data.compounds;
+        const ionsData = data.ions;
         const acidsData = data.acids;
         const motivationalPhrases = data.phrases;
         const elements = elementsData.map(element => ({ ...element, done: false }));
         const compounds = compoundsData.map(compound => ({ ...compound, done: false }));
         const acids = acidsData.map(acid => ({ ...acid, done: false }));
+        const ions = ionsData.map(ion => ({ ...ion, done: false }));
         //lets
         let currentFlashcardIndex = 0;
         let score = 0;
@@ -25,6 +27,7 @@ fetch('/chemistryData')
         let elementsProgress = 0;
         let compoundsProgress = 0;
         let acidsProgress = 0;
+        let ionsProgress = 0;
         let flashcardActivityStartTime = null;
         let isFormulaMode = false;
 
@@ -73,6 +76,7 @@ fetch('/chemistryData')
             elementsProgress = 0;
             compoundsProgress = 0;
             acidsProgress = 0;
+            ionsProgress =0;
             flashcardActivityStartTime = null;
 
             // Mark all flashcards as not done
@@ -104,6 +108,9 @@ fetch('/chemistryData')
             const textPrompt = promptText.querySelector('p');
             if (currentData === elements) {
                 textPrompt.textContent = "Guess the element:";
+            }
+            else if (currentData === ions) {
+                textPrompt.textContent = "Guess the ion:";
             }
             else if (currentData === compounds) {
                 textPrompt.textContent = "Guess the Polyatomic ion:";
@@ -244,16 +251,22 @@ fetch('/chemistryData')
             if (currentData === elements) {
                 // Switching from elements to compounds
                 compoundsProgress = currentFlashcardIndex;
+                currentData = ions;
+                currentFlashcardIndex = ionsProgress;
+            }
+
+            else if (currentData === ions) {
+                acidsProgress = currentFlashcardIndex;
                 currentData = compounds;
                 currentFlashcardIndex = compoundsProgress;
             }
-
-            else if (currentData === compounds) {
-                acidsProgress = currentFlashcardIndex;
+            else if (currentData === compounds){
+                // Switching from compounds to elements
+                elementsProgress = currentFlashcardIndex;
                 currentData = acids;
                 currentFlashcardIndex = acidsProgress;
             }
-            else {
+            else if (currentData === acids){
                 // Switching from compounds to elements
                 elementsProgress = currentFlashcardIndex;
                 currentData = elements;

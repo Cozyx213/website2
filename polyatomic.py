@@ -12,7 +12,7 @@ def insert_compound(compound_name, chemical_formula, description, charge):
     conn.commit()
     conn.close()
 polyatomic_ions = [
-    ("Acetate", "CH3CO2^-", -1, "Commonly found in vinegar and acts as a weak base."),
+    ("Acetate", "C2H3O2^-", -1, "Commonly found in vinegar and acts as a weak base."),
     ("Dichromate", "Cr2O7^2-", -2, "Used in various chemical processes, including in dichromate tests."),
     ("Hypobromite", "BrO^-", -1, "A chemical intermediate in the synthesis of organic compounds."),
     ("Perrhenate", "ReO4^-", -1, "Used in analytical chemistry and as a catalyst."),

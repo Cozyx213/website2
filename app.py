@@ -113,16 +113,20 @@ def Chemistry_data():
     cursor.execute('SELECT * FROM acids')
     acids = cursor.fetchall()
 
+    cursor.execute('SELECT * FROM ions')
+    ions = cursor.fetchall()
+
     compounds_list = [dict(row) for row in compounds]
     elements_list = [dict(row) for row in elements]
     acids_list = [dict(row) for row in acids]
-
+    ions_list = [dict(row) for row in ions]
     conn.close()
     
     return {'elements':elements_list,
              'compounds': compounds_list,
              'acids':acids_list,
-            'phrases':phrases.PHRASES()
+             'ions':ions_list,
+             'phrases':phrases.PHRASES()
             }
 
 #if __name__ == "__main__":
