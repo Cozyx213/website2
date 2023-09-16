@@ -31,15 +31,12 @@ def Chemistry_2():
 @app.route("/Chemistry3")
 def Chemistry_3():
     return render_template('Chemistry3.html')
-
 @app.route("/Form")
 def Form():
     return render_template("Form.html", strands=phrases.STRANDS(), sections=phrases.SECTIONS())
-
 @app.route("/History")
 def history():
     return render_template('History.html')
-
 @app.route("/Campus_Map")
 def Map():
     return render_template('Campus_Map.html')
