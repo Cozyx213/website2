@@ -37,6 +37,7 @@ fetch('/chemistryData')
         const scoreSpan = document.getElementById('score');
         const descriptionDiv = document.querySelector('.description');
         const backDiv = document.querySelector('.back');
+        const pastDiv = document.querySelector('.past');
         const acidButton = document.getElementById('acidButton');
         const nextButton = document.getElementById('nextButton');
         const shuffleButton = document.getElementById('shuffleButton');
@@ -162,7 +163,8 @@ fetch('/chemistryData')
             }
 
         }
-        function handleCorrectAnswer() {
+        function handleCorrectAnswer(correctAnswer) {
+            const answer = correctAnswer;
             if (currentData === compounds && currentData === acids) {
                 score += 5
             }
@@ -172,7 +174,9 @@ fetch('/chemistryData')
 
             scoreSpan.textContent = score;
             currentData[currentFlashcardIndex].done = true; // Mark flashcard as done
-
+            pastDiv.style.display = 'block';
+            console.log(answer)
+            pastDiv.querySelector('p').textContent = answer;
             nextFlashcard();
         }
         function handleIncorrectAnswer() {
@@ -186,7 +190,8 @@ fetch('/chemistryData')
                 const userAnswer = answerInput.value.trim().toLowerCase();
                 const correctAnswer = currentData[currentFlashcardIndex].element_symbol.toLowerCase();
                 if (userAnswer === correctAnswer) {
-                    handleCorrectAnswer();
+                     
+                    handleCorrectAnswer(origAnswer);
                 }
                 else if (userAnswer === "show") {
                     showAnswer();
@@ -201,7 +206,7 @@ fetch('/chemistryData')
                 const userAnswer = answerInput.value.trim().toLowerCase();
                 const correctAnswer = currentData[currentFlashcardIndex].element_name.toLowerCase();
                 if (userAnswer === correctAnswer) {
-                    handleCorrectAnswer();
+                    handleCorrectAnswer(origAnswer);
                 }
                 else if (userAnswer === "show") {
                     showAnswer();
