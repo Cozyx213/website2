@@ -64,7 +64,7 @@ def Enrollees():
     return render_template('Enrollees.html', userscores=userscores)  
 
 @app.route("/EnrolleesJSON")
-def EnrolleesJSON():
+def EnrolleesJSON():id
     sort_column = request.args.get('sort', default='score')  # Default to sorting by score
     # Adjust the SQL query based on the selected column
     if sort_column == 'time':
