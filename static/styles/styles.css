@@ -186,7 +186,7 @@ h1{
 
 .picture {
     display: block;
-    filter: brightness(70%);
+    filter: brightness(30%);
 }
 
 .picture_history {
