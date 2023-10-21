@@ -6,6 +6,9 @@ db = sqlite3.connect("enrollees.db",check_same_thread=False)
 db.row_factory = sqlite3.Row
 cursor = db.cursor()
 
+@app.route('/Campus_map')
+def map():
+    return render_template('Campus_Map.html')
 @app.route('/show_ppt', methods=['GET','POST'])     
 def show_ppt():
     # Get the subject value from the form
