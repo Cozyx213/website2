@@ -6,37 +6,72 @@ db = sqlite3.connect("enrollees.db",check_same_thread=False)
 db.row_factory = sqlite3.Row
 cursor = db.cursor()
 
-ppt_path = "modules/"
-def get_ppt_files():
-    ppt_files = []
-    for filename in os.listdir(ppt_path):
-        if filename.endswith(".pdf"):  # You can adjust the file extension if needed
-            ppt_files.append(filename)
-    ppt_files.sort()
-    return ppt_files
+@app.route('/show_ppt', methods=['GET','POST'])     
+def show_ppt():
+    # Get the subject value from the form
+    subject = request.form.get('subject')
+    # Get the list of files for that subject
+    ppt_files = get_ppt_files(subject)
+    file_info = []
+    # Render the template with the list of files
+    base_file_path = f"modules/{subject}"
+    for filename in ppt_files:
+        file_path = os.path.join(base_file_path, filename)
+        size = get_file_size(file_path)
+        file_info.append({'filename': filename, 'size': size, 'subject': subject})
 
-@app.route('/Resources.html')
+    return render_template('Resources.html', file_info=file_info)
+@app.route('/Resources')
 def resource_download():
-    ppt_files = get_ppt_files()
-    return render_template('Resources.html', ppt_files=ppt_files)
-@app.route('/download_ppt/<ppt_filename>')
-def download_ppt(ppt_filename):
-    return send_from_directory(ppt_path, ppt_filename, as_attachment=True)
+    return render_template('Resources.html')
+ 
+def get_ppt_files(subject):
+    file_path = f"modules/{subject}"
+    files = []
+    for filename in os.listdir(file_path):
+        #if filename.endswith(".pdf"):  # You can adjust the file extension if needed
+        files.append(filename)
+    files.sort()
+    return files
+    
+
+@app.context_processor
+def inject_get_file_size():
+    return dict(get_file_size=get_file_size)
+def get_file_size(file_path):
+    try:
+        size = os.path.getsize(file_path) # size in bytes
+        if size >= (1024 * 1024 * 1024): # size is greater than or equal to 1 GB
+            size = size / (1024 * 1024 * 1024) # size in GB
+            unit = "GB"
+        elif size >= (1024 * 1024): # size is greater than or equal to 1 MB
+            size = size / (1024 * 1024) # size in MB
+            unit = "MB"
+        elif size >= 1024: # size is greater than or equal to 1 KB
+            size = size / 1024 # size in KB
+            unit = "KB"
+        else: # size is less than 1 KB
+            unit = "bytes"
+        size = round(size, 1) # round the size to one decimal place
+        return f"{size} {unit}"
+    except OSError:
+        return "0 bytes"
+    
+
+@app.route('/download_ppt/<subject>/<ppt_filename>')
+def download_ppt(subject,ppt_filename):
+    file_path =f"modules/{subject}"
+    return send_from_directory(file_path, ppt_filename, as_attachment=True)
+
 @app.route('/')
 def endix():
     return render_template("endix.html")
-@app.route("/Form")
-def Form():
-    return render_template("Form.html", strands=phrases.STRANDS(), sections=phrases.SECTIONS())
-@app.route("/History")
-def history():
-    return render_template('History.html')
 @app.route("/Create")
 def Create():
     return render_template('Create.html')
-@app.route("/Campus_Map")
-def Map():
-    return render_template('Campus_Map.html')
+@app.route("/Chemistry")
+def Chemistry():
+    return render_template('Chemistry.html')
 
 @app.route("/leaderboards", methods = ["POST"])
 def Enroll():   
@@ -85,10 +120,22 @@ def deregister():
         db.commit()
     return redirect("/Enrollees")   
 
-@app.route("/Chemistry")
-def Chemistry():
-    return render_template('Chemistry.html')
-                           
+
+@app.route('/upload', methods=['GET', 'POST'])
+def upload_file():
+    if request.method == 'POST':
+        uploaded_file = request.files['file']
+        uploaded_subject= request.form['subject']
+        if uploaded_file and uploaded_subject:
+            # Save the uploaded file to a directory
+            file_path = f"modules/{uploaded_subject}/{uploaded_file.filename}"
+            uploaded_file.save(file_path)
+
+            # You can process or further handle the file here
+
+            return "File uploaded successfully."
+
+    return render_template('upload.html')      
 @app.route("/chemistryData")
 def Chemistry_data():
     conn = sqlite3.connect('flashcards.db')

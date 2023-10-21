@@ -1,12 +1,113 @@
 {% extends "layout.html" %}
 
 {% block body %}
+<style>
+    
+    .form-container {
+        background-color: #f0f0f0;
+        border: 1px solid #ccc;
+        margin: 10px;
+        padding: 10px;
+    }
+
+    .list-container {
+        background-color: #fff;
+        border: 1px solid #ccc;
+        margin: 10px;
+        padding: 10px;
+    }
+
+    table {
+        border-collapse: collapse;
+        width: 100%;
+    }
+
+    th,
+    td {
+        border: 1px solid #ccc;
+        padding: 5px;
+    }
+
+    th {
+        background-color: #3498db;
+        color: #fff;
+    }
+
+    td {
+        text-align: center;
+    }
+    
+    .boton {
+        background-color: #3498db;
+        color: #fff;
+        padding: 5px 10px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        margin: 5px;
+    }
+
+    .boton:hover {
+        background-color: #2980b9;
+    }
+
+    .dlink {
+        color: #135581;
+    }
+</style>
+
 <body>
-    <h1>List of PPT Files</h1>
-    <ul>
-        {% for ppt_file in ppt_files %}
-            <li><a href="{{ url_for('download_ppt', ppt_filename=ppt_file) }}">{{ ppt_file }}</a></li>
+
+    <form method="post" action="/show_ppt">
+        <button class="boton" type="submit" name="subject" value="GENCHEM">GENCHEM</button>
+        <button class="boton" type="submit" name="subject" value="CONTEMP">CONTEMP</button>
+        <button class="boton" type="submit" name="subject" value="RESEARCH">RESEARCH</button>
+        <button class="boton" type="submit" name="subject" value="EAP">EAP</button>
+        <button class="boton" type="submit" name="subject" value="MIL">MIL</button>
+        <button class="boton" type="submit" name="subject" value="GENPHYSICS">GENPHYSICS</button>
+        <button class="boton" type="submit" name="subject" value="PILINGLARANG">PILINGLARANG</button>
+        <button class="boton" type="submit" name="subject" value="PERDEV">PERDEV</button>
+        <button class="boton" type="submit" name="subject" value="BOOKS">BOOKS</button>
+    </form>
+   
+    <hr>
+    
+    <hr>
+    <table>
+        <tr>
+            <th>No.</th>
+            <th>File Name</th>
+            <th>File Size</th>
+        </tr>
+        {% for file in file_info %}
+        <tr>
+            <td>{{ loop.index }}</td>
+            <td><a class="dlink"
+                    href="{{ url_for('download_ppt',subject=file['subject'], ppt_filename=file['filename'] ) }}">{{file['filename']
+                    }}</a></td>
+            <td>{{ file['size']}}</td>
+        </tr>
         {% endfor %}
-    </ul>
+    </table>
+    <hr>
+
+    <div>Upload</div>
+    <form method="POST" action="/upload" enctype="multipart/form-data">
+        <input type="file" name="file">
+        <select name="subject">
+            <option>GENCHEM</option>
+            <option>CONTEMP</option>
+            <option>RESEARCH</option>
+            <option>EAP</option>
+            <option>MIL</option>
+            <option>GENPHYSICS</option>
+            <option>PILINGLARANG</option>
+            <option>PERDEV</option>
+            <option>BOOKS</option>
+        </select>
+        <input type="submit" value="Upload File">
+    </form>
 </body>
+
+
 {% endblock %}
